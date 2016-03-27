@@ -3,6 +3,7 @@ window.onload = function () {
     var message = document.getElementById("message");
     var sendButton = document.getElementById("send");
     var stopButton = document.getElementById("stop");
+    var messages = document.getElementById("messages");
 
     //WebSocket.CONNECTING
     //WebSocket.OPEN
@@ -21,7 +22,7 @@ window.onload = function () {
         }
     };
 
-    var socket = new WebSocket("ws://echo.websocket.org");
+    var socket = new WebSocket("ws://localhost:8081");
     socket.onopen = function (event) {
         console.log("successful connection");
         connectionStatus.innerHTML = "Connection is open";
@@ -45,7 +46,7 @@ window.onload = function () {
 
     socket.onmessage = function (event) {
         if (typeof event.data === "string") {
-            connectionStatus.innerHTML = event.data;
+            messages.innerHTML += "<br />" + event.data;
         }
     };
 
